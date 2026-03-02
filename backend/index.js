@@ -3,6 +3,12 @@ const cors = require("cors");
 const helmet = require("helmet");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
+const morgan = require("morgan");
+const connectDB = require("./data/db");
+const salesRoute = require("./routes/salesRoutes");
+const clientsRoute = require("./routes/clientsRoutes");
+const managementRoute = require("./routes/managementRoutes");
+const generalRoute = require("./routes/generalRoutes");
 
 dotenv.config();
 const app = express();
@@ -15,6 +21,19 @@ app.use(bodyParser.urlencoded());
 app.use(cors());
 
 const PORT = process.env.PORT || 5000;
-app.get("/api", (req, res) => {
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+app.get("/api/v1", (req, res) => {
   res.json({ message: "Hello from the backend!" });
 });
+
+//connect to database
+connectDB();
+
+//routes
+app.use("/api/sales", salesRoute);
+app.use("/api/clients", clientsRoute);
+app.use("/api/management", managementRoute);
+app.use("/api/general", generalRoute);
