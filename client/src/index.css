@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Momo+Trust+Display&family=Outfit:wght@100..900&family=Prata&display=swap");
+@import "tailwindcss";
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* ================= DEFAULT = LIGHT MODE ================= */
+
+@theme {
+  /* Background */
+  --color-bg: #ffffff;
+  --color-surface: #f9fafb;
+  --color-border: #e5e7eb;
+
+  /* Text */
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+
+  /* Brand */
+  --color-primary: #21295c;
+  --color-primary-hover: #191f45;
+
+  --color-secondary: #ffd166;
+}
+
+/* ================= DARK MODE OVERRIDES ================= */
+
+.dark {
+  --color-bg: #141414;
+  --color-surface: #1f1f1f;
+  --color-border: #2d2d2d;
+
+  --color-text-primary: #f3f4f6;
+  --color-text-secondary: #9ca3af;
+
+  --color-primary: #4d547d;
+  --color-primary-hover: #7a7f9d;
+
+  --color-secondary: #ffda85;
+}
