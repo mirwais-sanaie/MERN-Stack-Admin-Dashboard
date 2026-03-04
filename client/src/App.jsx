@@ -1,18 +1,33 @@
-import { useTheme } from "./contexts/ThemeProvider.jsx";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Layout from "./pages/Layout.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import { BrowserRouter } from "react-router-dom";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { useEffect, useMemo } from "react";
+import { useSelector } from "react-redux";
+import { themeSettings } from "./theme/index.js";
 
 export default function App() {
-  const { theme, toggleTheme } = useTheme();
+  const mode = useSelector((state) => state.global.mode);
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("dark", mode === "dark");
+  }, [mode]);
 
   return (
-    <div className="bg-bg text-text-primary min-h-screen p-10">
-      <h1 className="text-2xl font-bold">Current Theme: {theme}</h1>
-
-      <button
-        onClick={toggleTheme}
-        className="mt-6 bg-primary text-white px-4 py-2 rounded-lg"
-      >
-        Toggle Theme
-      </button>
-    </div>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Navigate to={"/dashboard"} replace />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
