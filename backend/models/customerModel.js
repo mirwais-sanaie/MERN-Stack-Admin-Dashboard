@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 8,
+    minlength: 6,
   },
   city: {
     type: String,
@@ -25,12 +25,12 @@ const userSchema = new mongoose.Schema({
   country: {
     type: String,
   },
-  profilePicture: {
-    type: String,
-    required: true,
-  },
+  // profilePicture: {
+  //   type: String,
+  //   required: true,
+  // },
   role: {
-    type: Boolean,
+    type: String,
     default: false,
   },
   phoneNumber: {
@@ -48,3 +48,5 @@ const userSchema = new mongoose.Schema({
     },
   ],
 });
+
+module.exports = mongoose.model("Customer", userSchema);

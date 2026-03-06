@@ -33,7 +33,7 @@ app.get("/api/v1", (req, res) => {
 connectDB();
 
 //routes
-app.use("/api/sales", salesRoute);
-app.use("/api/clients", clientsRoute);
-app.use("/api/management", managementRoute);
-app.use("/api/general", generalRoute);
+app.use("/api/v1/sales", salesRoute);
+app.use("/api/v1/clients", clientsRoute);
+app.use("/api/v1/management", managementRoute);
+app.use("/api/v1/general", generalRoute);

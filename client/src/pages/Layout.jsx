@@ -1,41 +1,36 @@
-import Navbar from "../components/Navbar.jsx";
-import Footer from "../components/Footer.jsx";
-import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Sidebar.jsx";
 import { useState } from "react";
+import { Box, useMediaQuery } from "@mui/material";
+import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Navbar from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
+import { useGetUserQuery } from "../state/api";
 
-function Layout() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const Layout = () => {
+  const isNonMobile = useMediaQuery("(min-width: 600px)");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const userId = useSelector((state) => state.global.userId);
+  const { data } = useGetUserQuery(userId);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar
-        user={null}
-        isSidebarOpen={isSidebarOpen}
-        setIsSidebarOpen={setIsSidebarOpen}
-      />
-
-      {/* Overlay */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 z-40"
-          onClick={() => setIsSidebarOpen(false)}
-        />
-      )}
-
+    <Box display={isNonMobile ? "flex" : "block"} width="100%" height="100%">
       <Sidebar
+        user={data || {}}
+        isNonMobile={isNonMobile}
         drawerWidth="250px"
-        user={null}
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
-        isNonMobile={true}
       />
-      <main className="mt-10 flex-1">
+      <Box flexGrow={1}>
+        <Navbar
+          user={data || {}}
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+        />
         <Outlet />
-      </main>
-      <Footer />
-    </div>
+      </Box>
+    </Box>
   );
-}
+};
 
 export default Layout;

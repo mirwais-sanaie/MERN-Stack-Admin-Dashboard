@@ -1,6 +1,5 @@
 import {
   Box,
-  Divider,
   Drawer,
   IconButton,
   List,
@@ -12,7 +11,6 @@ import {
   useTheme,
 } from "@mui/material";
 import {
-  SettingsOutlined,
   ChevronLeft,
   ChevronRightOutlined,
   HomeOutlined,
@@ -91,6 +89,7 @@ const navItems = [
 ];
 
 const Sidebar = ({
+  // user,
   drawerWidth,
   isSidebarOpen,
   setIsSidebarOpen,
