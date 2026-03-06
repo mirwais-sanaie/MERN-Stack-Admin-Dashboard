@@ -2,6 +2,7 @@ const { catchAsync } = require("../utils/catchAsync");
 const Product = require("../models/productModel");
 const ApiError = require("../utils/apiError");
 const Customer = require("../models/customerModel");
+require("../models/productStatesModel");
 
 exports.getProducts = catchAsync(async (req, res, next) => {
   const products = await Product.find().populate("stat");

@@ -169,7 +169,7 @@ const Sidebar = ({
                     >
                       <ListItemIcon
                         sx={{
-                          ml: "2rem",
+                          ml: "1rem",
                           color:
                             active === lcText
                               ? theme.palette.primary[600]
