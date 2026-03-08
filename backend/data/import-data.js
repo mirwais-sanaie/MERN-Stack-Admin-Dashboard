@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const Customer = require("../models/customerModel");
 const Product = require("../models/productModel");
+const Transaction = require("../models/transactionModel");
 
 dotenv.config({ path: "./.env" });
 
@@ -31,12 +32,16 @@ const products = JSON.parse(
 const customers = JSON.parse(
   fs.readFileSync(`${__dirname}/customers.json`, "utf-8"),
 );
+const transactions = JSON.parse(
+  fs.readFileSync(`${__dirname}/transactions.json`, "utf-8"),
+);
 
 // IMPORT DATA INTO DB
 const importData = async () => {
   try {
-    await Customer.create(customers);
-    await Product.create(products);
+    // await Customer.create(customers);
+    // await Product.create(products);
+    await Transaction.create(transactions);
     console.log("Data successfully loaded!");
   } catch (err) {
     console.log(err);

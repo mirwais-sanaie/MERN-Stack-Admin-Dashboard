@@ -39,7 +39,14 @@ exports.getTransactions = catchAsync(async (req, res, next) => {
         }
       : {};
 
-  const features = new ApiFeatures(Transaction.find(searchFilter), req.query)
+  // Remove `search` so ApiFeatures.filter() doesn't treat it as a DB field
+  const queryParams = { ...req.query };
+  delete queryParams.search;
+
+  const features = new ApiFeatures(
+    Transaction.find(searchFilter),
+    queryParams,
+  )
     .filter()
     .sort()
     .fields()
