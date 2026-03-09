@@ -65,3 +65,26 @@ exports.getTransactions = catchAsync(async (req, res, next) => {
     transactions,
   });
 });
+
+exports.getGeography = catchAsync(async (req, res, next) => {
+  const customers = await Customer.find().select("country");
+
+  if (!customers) {
+    return next(new ApiError("No customers found"));
+  }
+
+  const countryCounts = {};
+
+  customers.forEach((customer) => {
+    if (!customer.country) return;
+    const code = customer.country.toUpperCase();
+    countryCounts[code] = (countryCounts[code] || 0) + 1;
+  });
+
+  const formatted = Object.entries(countryCounts).map(([id, value]) => ({
+    id,
+    value,
+  }));
+
+  res.status(200).json(formatted);
+});

@@ -36,12 +36,27 @@ const transactions = JSON.parse(
   fs.readFileSync(`${__dirname}/transactions.json`, "utf-8"),
 );
 
+const productStats = JSON.parse(
+  fs.readFileSync(`${__dirname}/productStats.json`, "utf-8"),
+);
+
+const overallStats = JSON.parse(
+  fs.readFileSync(`${__dirname}/overallStats.json`, "utf-8"),
+);
+
+const Affiliate = JSON.parse(
+  fs.readFileSync(`${__dirname}/Affiliate.json`, "utf-8"),
+);
+
 // IMPORT DATA INTO DB
 const importData = async () => {
   try {
     // await Customer.create(customers);
     // await Product.create(products);
-    await Transaction.create(transactions);
+    // await Transaction.create(transactions);
+    await Affiliate.create(Affiliate);
+    await productStats.create(productStats);
+    await overallStats.create(overallStats);
     console.log("Data successfully loaded!");
   } catch (err) {
     console.log(err);
