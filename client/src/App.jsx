@@ -10,6 +10,13 @@ import { themeSettings } from "./theme/index.js";
 import Products from "./pages/Product.jsx";
 import Customers from "./pages/Customers.jsx";
 import Transactions from "./pages/Transaction.jsx";
+import Geography from "./pages/Geography.jsx";
+import Overview from "./pages/Overview.jsx";
+import Daily from "./pages/Daily.jsx";
+import Monthly from "./pages/Monthly.jsx";
+import Breakdown from "./pages/Breakdown.jsx";
+import Admin from "./pages/Admin.jsx";
+import Performance from "./pages/Performance.jsx";
 
 export default function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -31,6 +38,13 @@ export default function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/customers" element={<Customers />} />
             <Route path="/transactions" element={<Transactions />} />
+            <Route path="/geography" element={<Geography />} />
+            <Route path="/overview" element={<Overview />} />
+            <Route path="/daily" element={<Daily />} />
+            <Route path="/monthly" element={<Monthly />} />
+            <Route path="/breakdown" element={<Breakdown />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/performance" element={<Performance />} />
           </Route>
         </Routes>
       </ThemeProvider>
