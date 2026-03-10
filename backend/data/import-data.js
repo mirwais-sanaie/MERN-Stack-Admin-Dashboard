@@ -5,7 +5,7 @@ const Customer = require("../models/customerModel");
 const Product = require("../models/productModel");
 const Transaction = require("../models/transactionModel");
 const productModelStats = require("../models/productStatesModel");
-const overallStatsModel = require("../models/overallStatModel");
+const Overall = require("../models/overallStatModel");
 const AffiliateModel = require("../models/AffiliateStat");
 
 dotenv.config({ path: "./.env" });
@@ -57,9 +57,9 @@ const importData = async () => {
     // await Customer.create(customers);
     // await Product.create(products);
     // await Transaction.create(transactions);
-    await AffiliateModel.create(Affiliate);
-    await productModelStats.create(productStats);
-    await overallStatsModel.create(overallStats);
+    // await AffiliateModel.create(Affiliate);
+    // await productModelStats.create(productStats);
+    await Overall.create(overallStats);
     console.log("Data successfully loaded!");
   } catch (err) {
     console.log(err);
