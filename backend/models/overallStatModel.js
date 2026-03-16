@@ -15,7 +15,8 @@ const overalStatSchema = new mongoose.Schema(
       required: true,
     },
     year: {
-      type: String,
+      type: Number,
+      required: true,
     },
     monthlyData: [
       {

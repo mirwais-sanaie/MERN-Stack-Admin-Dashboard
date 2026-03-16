@@ -21,10 +21,13 @@ exports.getDashboardStats = catchAsync(async (req, res, next) => {
   const currentYear = 2021;
   const currentDay = "2021-11-15";
 
-  const [overallStat] = await Overall.find({ year: currentYear });
-  if (!overallStat) {
+  const overallStats = await Overall.find({ year: currentYear });
+
+  if (!overallStats || overallStats.length === 0) {
     return next(new ApiError("No overall stats found", 404));
   }
+
+  const overallStat = overallStats[0];
 
   // recent transactions
   const transactions = await Transaction.find()
@@ -35,12 +38,14 @@ exports.getDashboardStats = catchAsync(async (req, res, next) => {
     totalCustomers,
     yearlyTotalSoldUnits,
     yearlySalesTotal,
-    monthlyData,
-    dailyData,
+    monthlyData = [],
+    dailyData = [],
     salesByCategory,
   } = overallStat;
 
-  const thisMonthStats = monthlyData.find(({ month }) => month === currentMonth);
+  const thisMonthStats = monthlyData.find(
+    ({ month }) => month === currentMonth,
+  );
   const todayStats = dailyData.find(({ date }) => date === currentDay);
 
   res.status(200).json({
@@ -54,4 +59,3 @@ exports.getDashboardStats = catchAsync(async (req, res, next) => {
     transactions,
   });
 });
-
